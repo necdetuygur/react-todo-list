@@ -36,7 +36,9 @@ const Todo = {
         const index = todos.map(x => {
             return x.id;
         }).indexOf(todoId);
-        todos[index].title = todoTitle;
+        if (todoTitle) {
+            todos[index].title = todoTitle;
+        }
         updateTodos();
     },
     "ToggleComplete": function (todoId) {
