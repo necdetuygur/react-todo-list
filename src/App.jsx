@@ -30,7 +30,7 @@ class App extends Component {
             <div className="container mt-3">
                 <div className="row justify-content-md-center">
                     <div className="col-lg-6 col-md-8 col-sm-12">
-                        <Card title="React Todo List" button={<Button type="primary" onClick={() => { Todo.Add(window.prompt("Todo Title", "")); this.refreshTodos(); }} text="Add New" />}>
+                        <Card title="React Todo List" button={<Button type="success" onClick={() => { Todo.Add(window.prompt("Todo Title", "")); this.refreshTodos(); }} text="Add New" />}>
                             <div className="list-group list-group-flush">
                                 {(this.state.todos.length < 1) ? (
                                     <div>
