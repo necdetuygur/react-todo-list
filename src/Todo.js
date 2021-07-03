@@ -13,6 +13,9 @@ let todos = ls("todos") || [];
 
 const Todo = {
     "Add": function (todoTitle) {
+        if (!todoTitle) {
+            return;
+        }
         const todo = {
             id: "TodoID_" + new Date() * 1,
             title: todoTitle,
