@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import moment from 'moment';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.min.js';
-import Card from './Components/Card';
-import Button from './Components/Button';
+import Card from './components/Card';
+import Button from './components/Button';
 import Todo from './Todo';
 import Swal from 'sweetalert2';
 
