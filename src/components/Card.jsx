@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 
 class Card extends Component {
     render() {
+        const { title, button, children } = this.props;
         return (
             <div className="card">
                 <h5 className="card-header d-flex justify-content-between align-items-center">
-                    {this.props.title}
-                    {this.props.button}
+                    {title}
+                    {button}
                 </h5>
                 <div className="card-body">
-                    {this.props.children}
+                    {children}
                 </div>
             </div>
         )
