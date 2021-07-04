@@ -2,7 +2,7 @@ window.addEventListener('load', function () {
     var outputElement = document.getElementById('output');
     if (outputElement !== undefined) {
         navigator.serviceWorker.register('sw.js', {
-            scope: '/'
+            scope: '/react-todo-list/'
         })
             .then(function (r) {
                 /* console.log('registered service worker'); */
