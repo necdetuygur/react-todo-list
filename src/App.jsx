@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import moment from 'moment';
+import 'jquery';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'bootstrap/dist/js/bootstrap.min.js';
+import 'bootstrap';
 import Card from './Components/Card';
 import Button from './Components/Button';
+import Modal from './Components/Modal';
+import Input from './Components/Input';
 import Todo from './Todo';
 
 class App extends Component {
@@ -11,8 +14,11 @@ class App extends Component {
         super(props);
 
         this.state = {
-            todos: []
+            todos: [],
+            todoTitle: ""
         };
+
+        this.modalInputOnChange = this.modalInputOnChange.bind(this);
     }
 
     componentDidMount() {
@@ -25,12 +31,47 @@ class App extends Component {
         });
     }
 
+    modalInputOnChange(text) {
+        this.setState({
+            todoTitle: text
+        })
+    }
+
     render() {
         return (
             <div className="container mt-3">
+
+
+
+                <Modal title="Todo Title" id="addNew" okClick={() => { Todo.Add(this.state.todoTitle); this.refreshTodos(); }} okButtonText="OK" cancelButtonText="Cancel">
+                    <Input
+                        id="todoTitle"
+                        title="Todo Title"
+                        onChange={this.modalInputOnChange}
+                        value={this.state.todoTitle}
+                        onEnterKeyPress={() => {
+                            Todo.Add(this.state.todoTitle);
+                            this.refreshTodos();
+                        }}
+                    />
+                </Modal>
+
+
+
+
+
+
                 <div className="row justify-content-md-center">
                     <div className="col-lg-6 col-md-8 col-sm-12">
-                        <Card title="React Todo List" button={<Button type="success" onClick={() => { Todo.Add(window.prompt("Todo Title", "")); this.refreshTodos(); }} text="Add New" />}>
+                        <Card title="React Todo List" button={
+                            <Button type="success" text="Add New" modalId="addNew" onClick={
+                                () => {
+                                    setTimeout(() => {
+                                        document.getElementById("todoTitle").focus();
+                                    }, 333);
+                                }
+                            } />
+                        }>
                             <div className="list-group list-group-flush">
                                 {(this.state.todos.length < 1) ? (
                                     <div>
@@ -52,9 +93,20 @@ class App extends Component {
                                             <small>{moment(todo.time).format("YYYY-MM-DD HH:mm:ss")}</small>
                                         </div>
                                         <div className="d-flex w-100 justify-content-center">
-                                            <Button type="secondary" onClick={() => { Todo.ToggleComplete(todo.id); this.refreshTodos(); }} text={todo.completed ? "Set Incomplete" : "Set Complete"} />
-                                            <Button type="primary" onClick={() => { Todo.Edit(todo.id, prompt("Todo Title", todo.title)); this.refreshTodos(); }} text="Edit" />
-                                            <Button type="danger" onClick={() => { if (window.confirm("Are you sure?")) { Todo.Remove(todo.id); this.refreshTodos(); } }} text="Remove" />
+                                            <Button type="secondary" onClick={() => {
+                                                Todo.ToggleComplete(todo.id);
+                                                this.refreshTodos();
+                                            }} text={todo.completed ? "Set Incomplete" : "Set Complete"} />
+                                            <Button type="primary" onClick={() => {
+                                                Todo.Edit(todo.id, prompt("Todo Title", todo.title));
+                                                this.refreshTodos();
+                                            }} text="Edit" />
+                                            <Button type="danger" onClick={() => {
+                                                if (window.confirm("Are you sure?")) {
+                                                    Todo.Remove(todo.id);
+                                                    this.refreshTodos();
+                                                }
+                                            }} text="Remove" />
                                         </div>
                                     </div>
                                 )))}
