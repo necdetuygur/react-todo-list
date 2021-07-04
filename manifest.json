@@ -2,7 +2,7 @@
     "theme_color": "#112233",
     "background_color": "#ffffff",
     "display": "standalone",
-    "scope": "/",
+    "scope": "/react-todo-list/",
     "start_url": "https://necdetuygur.github.io/react-todo-list/",
     "name": "React Todo List",
     "short_name": "React Todo List",
