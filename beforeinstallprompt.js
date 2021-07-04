@@ -11,7 +11,7 @@ window.addEventListener('load', function () {
                 console.error(x1);
             });
         window.addEventListener('beforeinstallprompt', function (e) {
-            outputElement.textContent = 'beforeinstallprompt Event fired';
+            // outputElement.textContent = 'beforeinstallprompt Event fired';
         });
     }
 });
